@@ -114,19 +114,19 @@ Cursor wrapped VS Code. Hugging Face wrapped Git. Now, GitHub Wrapper is here â€
 > Backend Configuration
 
 ```bash
-cp beetle_backend/env.example beetle_backend/.env
+cp beetle_backend/.env.example beetle_backend/.env
 ```
 
 > Python Backend Configuration
 
 ```bash
-cp python_backend/env.example python_backend/.env
+cp python_backend/.env.example python_backend/.env
 ```
 
 > Frontend Configuration
 
 ```bash
-cp beetle_frontend/env.example beetle_frontend/.env
+cp beetle_frontend/.env.example beetle_frontend/.env
 ```
 
 > **Note**: Replace all placeholder values (starting with `your_`) with your actual configuration values.
@@ -141,7 +141,7 @@ cp beetle_frontend/env.example beetle_frontend/.env
 
 2. **Setup Python Backend**
    ```bash
-   cd beetle_backend
+   cd python_backend
    python -m venv venv
    source venv/bin/activate  # On Linux/Mac
    .\venv\Scripts\activate # On Windows
@@ -160,11 +160,16 @@ cp beetle_frontend/env.example beetle_frontend/.env
    npm install
    ```
 
+5. **Setup Qdrant**
+   ```bash
+   docker run -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage:z qdrant/qdrant
+   ```
+
 ### Running the Application
 
 1. **Start Python Backend** (in first terminal)
    ```bash
-   cd beetle_backend
+   cd python_backend
    source venv/bin/activate  # On Linux/Mac
    .\venv\Scripts\activate # On Windows
    uvicorn app:app --host 0.0.0.0 --port 8000 --reload
@@ -176,6 +181,12 @@ cp beetle_frontend/env.example beetle_frontend/.env
    ./setup.bat # On windows
    ./setup.sh # On linux
    ./setup.js # On Mac
+   ```
+   or
+
+      ```bash
+   cd beetle_backend
+   npm run dev
    ```
 
 3. **Start Frontend** (in third terminal)
